@@ -1,0 +1,15 @@
+<base target="_blank">
+<!-- Empty link requrired to get target=_blank to work-->
+<a href=""></a>
+<br>
+**Paper Title:** Drug and vaccine resistance in hepatitis B virus (HBV) 2 in Africa: A systematic literature review
+
+**Authors:** Jolynne Mokaya, Anna McNaughton, Martin Hadley, Apsotolos Beloukas, Dominique Goedhals, Philippa C Matthews
+
+**DOI:** TBD
+
+**Data Deposit:** TBD
+
+**Code Deposit:** TBD
+
+**Abstract:** TBD
