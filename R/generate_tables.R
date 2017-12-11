@@ -2,19 +2,10 @@
 #'
 #' \code{alignment_DT_unique_id} generartes a unique ID for all DT::datatable outputs shown within the sequence table visualisation
 #' @export
-#'
+
 alignment_DT_unique_id <- function() {
-  paste0(
-    "sequenceDT_",
-    as.integer(Sys.time()),
-    encode(
-      round(rnorm(1) * 100000) + as.integer(Sys.time()),
-      hashid_settings(salt = "shiny is great", min_length = 15)
-    )
-  )
+  paste0("aDT", paste0(sample(letters, 5, TRUE), collapse = ""), collapse = "")
 }
-
-
 
 #' alignment_data
 #'
@@ -27,16 +18,16 @@ alignment_DT_unique_id <- function() {
 #' @importFrom htmlwidgets JS
 #' @importFrom rlang .data
 #'
-#' @param data A data.frame with start-end pairs, needs the following columns
+#' @param data A data.frame containing gene sequence data, which must contain the following columns:
 #' \itemize{
 #'  \item{"position"}{ : sequence position, these must be sequential}
 #'  \item{"colour"}{ : colour for the sequence in the gene.alignment.tables visualisation}
 #'  \item{"..."}{ : any other columns will be displayed in the visualisation directly below the position number}
 #'  }
 #'
-#' @param table.width the width of the gene.alignment.tables, defaults to 20 positions.
+#' @param table.width the width of the gene.alignment.tables, defaults to 15 positions.
 #' @param slice.position fii
-#' @export
+#' 
 alignment_data <- function(data,
                            table.width = 15,
                            slice.position,
@@ -83,97 +74,6 @@ alignment_data <- function(data,
 #'
 #' @param table.width the width of the gene.alignment.tables, defaults to 20 positions.
 #' @param slice.position fio
-#' @export
-#' 
-# 
-# alignment_DT <- function(data,
-#                          table.width = 15,
-#                          slice.position,
-#                          return.data = FALSE,
-#                          alignment.dt.unique.id) {
-#   
-#   long_data <- alignment_data(
-#     data,
-#     table.width,
-#     slice.position,
-#     return.data
-#   )
-# 
-#   col_colours <- long_data %>%
-#     select(.data$colour) %>%
-#     mutate(col.index = row_number() + 1)
-# 
-#   tr_data <- long_data %>%
-#     select(-.data$colour) %>%
-#     gather(., foo, val, 2:ncol(.)) %>%
-#     spread(.data$position, .data$val) %>%
-#     mutate_all(funs(coalesce(., "-")))
-# 
-#   colnames(tr_data) <- gsub("foo", "Position", colnames(tr_data))
-# 
-#   the_dt <- tr_data %>%
-#     datatable(
-#       colnames = lapply(
-#         colnames(tr_data),
-#         function(x) {
-#           if (x != "Position") {
-#             paste0("<h6 style='transform:rotate(270deg);'>", x, "</h6>")
-#           } else {
-#             "Position"
-#           }
-#         }
-#       ) %>%
-#         as.character(),
-#       escape = FALSE,
-#       rownames = FALSE,
-#       options = list(
-#         dom = "t",
-#         ordering = F,
-#         autoWidth = TRUE,
-#         initComplete = JS(
-#           "function(settings, json) {",
-#           "var headerBorder = [0,1];",
-#           "var header = $(this.api().table().header()).find('tr:first > th').filter(function(index) {return $.inArray(index,headerBorder) > -1 ;}).addClass('cell-border-right');",
-#           "}"
-#         ),
-#         columnDefs = list(
-#           # list(width = '40px', targets = 1),
-#           list(className = "dt-right cell-border-right", targets = 1:table.width)
-#         )
-#       ),
-#       selection = list(target = "column", mode = "multiple"),
-#       elementId = paste0(
-#         alignment.dt.unique.id,
-#         "_",
-#         slice.position - table.width + 1,
-#         "_",
-#         slice.position
-#       ),
-#       height = "100%"
-#     )
-# 
-#   
-# 
-#   
-#   lapply(
-#     unique(col_colours$colour),
-#     function(col_colour) {
-#       col_indices <- col_colours %>%
-#         filter(.data$colour == col_colour) %>%
-#         select(.data$col.index) %>%
-#         .[[1]]
-# 
-#       the_dt <<- the_dt %>%
-#         formatStyle(
-#           columns = col_indices,
-#           backgroundColor = col_colour
-#         )
-#     }
-#   )
-# 
-#   the_dt
-# }
-
 
 alignment_DT <- function(data,
                          table.width = 15,
@@ -232,7 +132,8 @@ alignment_DT <- function(data,
       ),
       selection = list(target = "column", mode = "multiple"),
       elementId = paste0(
-        "alignmentDT_",
+        alignment.table.id,
+        "_",
         slice.position - table.width + 1,
         "_",
         slice.position
@@ -240,9 +141,7 @@ alignment_DT <- function(data,
       height = "100%"
     )
   
-  
-  
-  
+
   lapply(
     unique(col_colours$colour),
     function(col_colour) {
@@ -266,15 +165,15 @@ alignment_DT <- function(data,
 #'
 #' \code{generate_dts} generates a set of DT::datatable objects.
 #'
-#' @param data A data.frame with start-end pairs, needs the following columns
+#' @param data A data.frame containing gene sequence data, which must contain the following columns:
 #' \itemize{
 #'  \item{"position"}{ : sequence position, these must be sequential}
 #'  \item{"colour"}{ : colour for the sequence in the gene.alignment.tables visualisation}
 #'  \item{"..."}{ : any other columns will be displayed in the visualisation directly below the position number}
 #'  }
 #'
-#' @param table.width the width of the gene.alignment.tables, defaults to 20 positions.
-#' @param slice.position egrger
+#' @param table.width the width of the gene.alignment.tables, defaults to 15 positions.
+#' @param alignment.dt.unique.id The unique name given to DT::datatable objects created by generate_dts, must contain ONLY alphabetical characters. Use \code{alignment_DT_unique_id} to ensure a safe name is created. 
 #' @export
 
 # generate_dts <- function(data,
