@@ -8,8 +8,7 @@ sequence_region_colours <- list(
   "Reverse transcriptase" = "#f4b084",
   "RNAse H" = "#bdd7ee",
   "Pre-S2" = "#fe6600",
-  "Surface antigen" = "#a9d08e",
-  NA = "#a6761d"
+  "Surface antigen" = "#a9d08e"
 )
 
 coding_region_colours <- as_tibble(sequence_region_colours) %>%
@@ -19,7 +18,7 @@ save(coding_region_colours, file = "data/coding_region_colours.rdata")
 
 hbv_pol_sequence <- hbv_pol_data %>%
   filter(sheet == "HBV Pol") %>%
-  select(-sheet, -african.data) %>%
+  select(-sheet) %>%
   mutate(colour = plyr::mapvalues(label, from = names(sequence_region_colours),
                                   to = as.character(sequence_region_colours))) %>%
   select(-label) %>%
@@ -29,7 +28,7 @@ save(hbv_pol_sequence, file = "data/hbv_pol_sequence.rdata")
 
 hbv_long_s_sequence <- hbv_pol_data %>%
   filter(sheet == "HBV long S") %>%
-  select(-sheet, -african.data) %>%
+  select(-sheet) %>%
   mutate(colour = plyr::mapvalues(label, from = names(sequence_region_colours),
                                   to = as.character(sequence_region_colours))) %>%
   select(-label) %>%
