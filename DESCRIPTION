@@ -11,14 +11,12 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Depends:
     magrittr,
-    DT,
-    shiny,
-    dplyr,
     tidyr,
+    dplyr,
+    DT,
     htmlwidgets,
     stringr,
-    rlang,
-    hashids
+    rlang
 Suggests: 
     testthat,
     knitr,
