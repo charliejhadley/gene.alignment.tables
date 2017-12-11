@@ -1,56 +1,67 @@
-#' generate_selected_col_ids
-#'
-#' \code{generate_selected_col_ids} generate selected col ids for selected position
-#' 
-#' @importFrom dplyr add_row coalesce
-#' @importFrom stringr str_match_all
-#'
-#' @param data A data.frame with start-end pairs, needs the following columns
-#' \itemize{
-#'  \item{"position"}{ : sequence position, these must be sequential}
-#'  \item{"colour"}{ : colour for the sequence in the gene.alignment.tables visualisation}
-#'  \item{"..."}{ : any other columns will be displayed in the visualisation directly below the position number}
-#'  }
-#'
-#' @param table.width the width of the gene.alignment.tables, defaults to 20 positions.
-#' @param slice.position
-#'
-
-generate_selected_col_ids <- function(data,
-                                      table.width = 15,
-                                      alignment.dt.unique.id){
-  
-  table_width <- table.width
-  table_width_1 <- table_width - 1
-  
-  
-  lapply(seq(
-    table_width,
-    ceiling(max(data$position) / table_width) * table_width,
-    table_width
-  ), function(x){
-    paste0(
-      alignment.dt.unique.id,
-      "_",
-      x - table.width + 1,
-      "_",
-      x,
-      "_columns_selected"
-    )
-  }) %>%
-    as.character()
-  
-}
-
 #' id_to_sequence_positon
 #'
-#' \code{id_to_sequence_positon} generate selected col ids for selected position
-#'
-#' @param id
+#' \code{id_to_sequence_positon} converts selected columns in the gene.alignment.tables visualisation to positions in the original sequence dataset.
+#' 
+#' @param id InputID of the format aDTXXXXX_n_m_columns_selected from the DT::datatables generated for the gene.alignment.table visualisation
+#' @param shiny.input The input object of the Shiny app
+#' 
+#' @examples 
+#' 
+#' \dontrun{
+#' 
+#' ## create a set of reactiveValues to store the selected column ids
+#' selected_col_values <- reactiveValues() 
+#' 
+#' ## observe all input values matching the format aDTXXXXX_n_m_columns_selected
+#' observe({
+#' if (!is.null(input[[paste0(alignment.dt.unique.id,
+#'                            "_1_",
+#'                            table_width,
+#'                            "_rows_current")]])) {
+#'   selected_col_values[["previous"]] <-
+#'     isolate(selected_col_values[["current"]])
+#'   
+#'   all_inputs <- isolate(reactiveValuesToList(input))
+#'   
+#'   inputs_selected_cols <-
+#'     grepl(
+#'       paste0(
+#'         alignment.dt.unique.id,
+#'         "_[0-9]{1,}_[0-9]{1,}_columns_selected"
+#'       ),
+#'       names(all_inputs)
+#'     )
+#'   
+#'   inputs_with_nulls <- all_inputs[inputs_selected_cols]
+#'   
+#'  inputs_selected_cols <-
+#'    setNames(inputs_with_nulls, names(all_inputs)[inputs_selected_cols])
+#'  
+#'   selected_positions <-
+#'     lapply(names(inputs_selected_cols), function(id) {
+#'       id_to_sequence_position(id, shiny.input = input)
+#'     }) %>%
+#'     unlist()
+#'   
+#'   selected_positions
+#' } else {
+#'   if (is.null(selected_col_values[["current"]])){
+#'     selected_positions <- NULL
+#'   }
+#'   else {
+#'     selected_positions <- selected_col_values[["current"]]
+#'   }
+#' }
+#' 
+#' selected_col_values[["current"]] <- selected_positions
+#' })
+#' 
+#' }
+#' 
 #' @export
 
 id_to_sequence_position <- function(id, shiny.input) {
-  
+
   rows_in_data <-
     str_match_all(id, "[0-9]+") %>%
     unlist() %>%
