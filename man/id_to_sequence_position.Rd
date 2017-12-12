@@ -7,7 +7,7 @@
 id_to_sequence_position(id, shiny.input)
 }
 \arguments{
-\item{id}{InputID of the format aDTXXXXX_n_m_columns_selected from the DT::datatables generated for the gene.alignment.table visualisation}
+\item{id}{InputID of the format aDTXXXXX_n_m_columns_selected from the \code{datatables} generated for the gene.alignment.table visualisation}
 
 \item{shiny.input}{The input object of the Shiny app}
 }

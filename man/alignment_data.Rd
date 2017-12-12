@@ -19,5 +19,5 @@ alignment_data(data, table.width = 15, slice.position, return.data = FALSE)
 \item{slice.position}{fii}
 }
 \description{
-\code{alignment_data} converts a sequence dataset into the format required for the gene.alignment.tables visualisation
+alignment_data converts a sequence dataset into the format required for the gene.alignment.tables visualisation
 }

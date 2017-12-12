@@ -7,5 +7,5 @@
 alignment_DT_unique_id()
 }
 \description{
-\code{alignment_DT_unique_id} generartes a unique ID for all DT::datatable outputs shown within the sequence table visualisation
+alignment_DT_unique_id generartes a unique ID for all datatable outputs shown within the sequence table visualisation
 }

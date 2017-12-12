@@ -20,5 +20,5 @@ alignment_DT(data, table.width = 15, slice.position, return.data = FALSE,
 \item{slice.position}{fio}
 }
 \description{
-\code{alignment_DT} generates a single DT::datatable
+alignment_DT generates a single datatable
 }
