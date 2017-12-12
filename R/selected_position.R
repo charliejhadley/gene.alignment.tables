@@ -2,7 +2,7 @@
 #'
 #' \code{id_to_sequence_positon} converts selected columns in the gene.alignment.tables visualisation to positions in the original sequence dataset.
 #' 
-#' @param id InputID of the format aDTXXXXX_n_m_columns_selected from the DT::datatables generated for the gene.alignment.table visualisation
+#' @param id InputID of the format aDTXXXXX_n_m_columns_selected from the \code{datatables} generated for the gene.alignment.table visualisation
 #' @param shiny.input The input object of the Shiny app
 #' 
 #' @examples 
