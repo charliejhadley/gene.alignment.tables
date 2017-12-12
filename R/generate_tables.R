@@ -1,6 +1,13 @@
 #' alignment_DT_unique_id
 #'
-#' \code{alignment_DT_unique_id} generartes a unique ID for all DT::datatable outputs shown within the sequence table visualisation
+#' alignment_DT_unique_id generartes a unique ID for all datatable outputs shown within the sequence table visualisation
+#' 
+#' @importFrom magrittr %>%
+#' @importFrom tidyr gather spread
+#' @importFrom dplyr row_number mutate bind_rows select mutate_all funs slice filter
+#' @importFrom DT formatStyle datatable
+#' @importFrom htmlwidgets JS
+#' 
 #' @export
 
 alignment_DT_unique_id <- function() {
@@ -9,14 +16,7 @@ alignment_DT_unique_id <- function() {
 
 #' alignment_data
 #'
-#' \code{alignment_data} converts a sequence dataset into the format required for the gene.alignment.tables visualisation
-#'
-#' @importFrom magrittr %>%
-#' @importFrom tidyr gather spread
-#' @importFrom dplyr row_number mutate bind_rows select mutate_all funs slice filter
-#' @importFrom DT formatStyle datatable
-#' @importFrom htmlwidgets JS
-#' @importFrom rlang .data
+#' alignment_data converts a sequence dataset into the format required for the gene.alignment.tables visualisation
 #'
 #' @param data A data.frame containing gene sequence data, which must contain the following columns:
 #' \itemize{
@@ -26,7 +26,6 @@ alignment_DT_unique_id <- function() {
 #'  }
 #'
 #' @param table.width the width of the gene.alignment.tables, defaults to 15 positions.
-#' @param slice.position fii
 #' 
 alignment_data <- function(data,
                            table.width = 15,
@@ -63,7 +62,7 @@ alignment_data <- function(data,
 
 #' alignment_DT
 #'
-#' \code{alignment_DT} generates a single DT::datatable
+#' alignment_DT generates a single datatable
 #'
 #' @param data A data.frame with start-end pairs, needs the following columns
 #' \itemize{
@@ -163,7 +162,7 @@ alignment_DT <- function(data,
 
 #' generate_dts
 #'
-#' \code{generate_dts} generates a set of DT::datatable objects.
+#' \code{generate_dts} generates a set of \code{datatable} objects.
 #'
 #' @param data A data.frame containing gene sequence data, which must contain the following columns:
 #' \itemize{
@@ -173,7 +172,7 @@ alignment_DT <- function(data,
 #'  }
 #'
 #' @param table.width the width of the gene.alignment.tables, defaults to 15 positions.
-#' @param alignment.dt.unique.id The unique name given to DT::datatable objects created by generate_dts, must contain ONLY alphabetical characters. Use \code{alignment_DT_unique_id} to ensure a safe name is created. 
+#' @param alignment.dt.unique.id The unique name given to datatable objects created by generate_dts, must contain ONLY alphabetical characters. Use alignment_DT_unique_id to ensure a safe name is created. 
 #' @export
 
 # generate_dts <- function(data,
