@@ -1,64 +1,59 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-"
-)
-library("knitr")
-```
-# gene.alignment.tables
+gene.alignment.tables
+=====================
 
 This package allows for interactive gene sequence alignment visualisations to be embedded into Shiny apps. An example Shiny app is provided in this package and available using `runExample`, please note that at present the output will only work within a Shiny app - future support to output as a htmlwidget might be possible...
 
-```{r runExample, eval=FALSE}
+``` r
 runExample
 ```
 
-```{r generate_webshot, out.width = '330px', include=TRUE, echo=FALSE}
-library("webshot")
-webshot::appshot(app = "inst/shiny-examples/hbv-alignment-viz/",
-                 file = "man/figures/README-hbv-alignment-example.png",
-                 delay = 7)
-include_graphics(path = "man/figures/README-hbv-alignment-example.png")
-```
+<img src="man/figures/README-hbv-alignment-example.png" width="330px" />
 
-## Installation
+Installation
+------------
 
 You can install gene.alignment.tables from github with:
 
-```{r gh-installation, eval = FALSE}
+``` r
 # install.packages("devtools")
 devtools::install_github("martinjhnhadley/gene.alignment.tables")
 ```
 
 It's unlikely this package will live on CRAN, if it ever does there will be significant changes to the packages before deployment.
 
-## Example
+Example
+-------
 
 The package comes with two example datasets, both of these are based on real research datasets but anonymised.
 
-```{r exampledata, eval=TRUE, message=FALSE, warning=FALSE}
+``` r
 library("gene.alignment.tables")
 str(hbv_long_s_sequence)
+#> Classes 'tbl_df', 'tbl' and 'data.frame':    300 obs. of  4 variables:
+#>  $ position : int  1 2 3 4 5 6 7 8 9 10 ...
+#>  $ reference: chr  "W" "R" "Y" "Q" ...
+#>  $ genome.a : chr  "-" "-" "-" "-" ...
+#>  $ colour   : chr  "#f9fd74" "#ccfecc" NA "#bdd7ee" ...
 str(hbv_pol_sequence)
+#> Classes 'tbl_df', 'tbl' and 'data.frame':    843 obs. of  4 variables:
+#>  $ position : int  1 2 3 4 5 6 7 8 9 10 ...
+#>  $ reference: chr  "S" "C" "E" "S" ...
+#>  $ genome.a : chr  "-" "-" "-" "-" ...
+#>  $ colour   : chr  "#f4b084" "#bdd7ee" "#f4b084" "#fe6600" ...
 ```
 
 To use visualise your own data you must have the following columns, any other columns will be displayed in the gene.tables.alignment viz.
 
-| position | colour |
-| :---: | :---: |
-| 1 | "#f9fd74" |
-| 2 | "#f9fd74" |
+| position |   colour   |
+|:--------:|:----------:|
+|     1    | "\#f9fd74" |
+|     2    | "\#f9fd74" |
 
 You must also ensure to create the following observer and `reactiveValues` object in your `server.R` file:
 
-```{r observer-example, eval = FALSE}
+``` r
 selected_col_values <- reactiveValues()
   
   observe({
@@ -109,10 +104,7 @@ selected_col_values <- reactiveValues()
 
 The selection of the sequence elements can be watched as follows:
 
-```{r watch-for-selections, eval=FALSE}
+``` r
 selected_positions <- selected_col_values[["current"]] %>%
       sort()
 ```
-
-
-
