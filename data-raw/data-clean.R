@@ -22,7 +22,7 @@ hbv_pol_sequence <- hbv_pol_data %>%
   mutate(colour = plyr::mapvalues(label, from = names(sequence_region_colours),
                                   to = as.character(sequence_region_colours))) %>%
   select(-label) %>%
-  replace_na(list(colour = "#a6761d"))
+  replace_na(list(colour = NA))
 
 save(hbv_pol_sequence, file = "data/hbv_pol_sequence.rdata")
 
@@ -32,6 +32,6 @@ hbv_long_s_sequence <- hbv_pol_data %>%
   mutate(colour = plyr::mapvalues(label, from = names(sequence_region_colours),
                                   to = as.character(sequence_region_colours))) %>%
   select(-label) %>%
-  replace_na(list(colour = "#a6761d"))
+  replace_na(list(colour = NA))
 
 save(hbv_long_s_sequence, file = "data/hbv_long_s_sequence.rdata")
