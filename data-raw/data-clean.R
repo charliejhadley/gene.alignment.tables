@@ -12,7 +12,8 @@ sequence_region_colours <- list(
 )
 
 coding_region_colours <- as_tibble(sequence_region_colours) %>%
-  gather(coding.region, colour)
+  gather(coding.region, colour) %>%
+  rename(label = coding.region)
 
 save(coding_region_colours, file = "data/coding_region_colours.rdata")
 
