@@ -1,47 +1,38 @@
-library("plyr")
 library("shiny")
 library("rhandsontable")
 library("tidyverse")
 library("DT")
 library("shinyjs")
+library("gene.alignment.tables")
 
-# dummy_data <- read_csv("data-raw/example_row.csv")
-
-source("data-processing.R", local = TRUE)
-
-id_of_alignment_table <- "alignmentDT"
 table_width <- 15
 
 function(input, output, session) {
-  source("alignment_DT.R", local = TRUE)$value
   
-  output$programmatic_many_DT_UI <- renderUI({
-
-    if (!is.null(input[[paste0(id_of_alignment_table,
-                               "_1_",
-                               table_width,
-                               "_rows_current")]])) {
-      shinyjs::hide(id = "loading-content",
-                    anim = TRUE,
-                    animType = "fade")
-    }
-    result <- hbv_table_data %>%
-      filter(sheet == input$selected_species) %>%
-      generate_dts(table.width = table_width)
+  alignment.dt.unique.id <- alignment_DT_unique_id()
+  
+  output$sequence_alignment_UI <- renderUI({
     
-    print("total colour time")
-    print(colour_timer)
+    the_datatables <- hbv_long_s_sequence %>%
+      generate_dts(table.width = table_width,
+                   alignment.table.id = alignment.dt.unique.id)
     
     fluidPage(
-      result
+      the_datatables
     )
+    
+  })
+  
+  output$sequence_coding_region_legend <- renderPlot({
+    
+    coding_region_legend(coding_region_colours)
     
   })
   
   selected_col_values <- reactiveValues()
   
   observe({
-    if (!is.null(input[[paste0(id_of_alignment_table,
+    if (!is.null(input[[paste0(alignment.dt.unique.id,
                                "_1_",
                                table_width,
                                "_rows_current")]])) {
@@ -53,52 +44,54 @@ function(input, output, session) {
       inputs_selected_cols <-
         grepl(
           paste0(
-            id_of_alignment_table,
+            alignment.dt.unique.id,
             "_[0-9]{1,}_[0-9]{1,}_columns_selected"
           ),
           names(all_inputs)
         )
-      
+
       inputs_with_nulls <- all_inputs[inputs_selected_cols]
       
       inputs_selected_cols <-
         setNames(inputs_with_nulls, names(all_inputs)[inputs_selected_cols])
-      
-      rows_selected <-
+
+      selected_positions <-
         lapply(names(inputs_selected_cols), function(id) {
-          id_to_sequence_positon(id)
+          id_to_sequence_position(id, shiny.input = input)
         }) %>%
         unlist()
+
+      selected_positions
       
-      rows_selected
-      
+
     } else {
-      if (is.null(selected_col_values[["current"]]))
-        rows_selected <- NULL
-      else
-        rows_selected <- selected_col_values[["current"]]
+      if (is.null(selected_col_values[["current"]])){
+        selected_positions <- NULL
+      }
+      else {
+        selected_positions <- selected_col_values[["current"]]
+      }
     }
     
-    
-    
-    selected_col_values[["current"]] <- rows_selected
+    selected_col_values[["current"]] <- selected_positions
   })
   
-  
-  output$observe_show_inputs <- renderDataTable({
-    data_rows_selected <- selected_col_values[["current"]]
+  output$observe_show_inputs <- DT::renderDataTable({
     
-    if (is.null(data_rows_selected)) {
-      return()
-    }
     
-    reactive(input$selected_species)
+    selected_positions <- selected_col_values[["current"]] %>%
+      sort()
     
-    hbv_table_data[sort(data_rows_selected),] %>%
+    if (is.null(selected_positions)) {
+      
+      hbv_long_s_sequence[0,] %>%
+        datatable()
+    } 
+    
+    hbv_long_s_sequence %>%
+      filter(position %in% selected_positions) %>%
       datatable()
-    
-    # print(AllInputs())
-    # columns_selected()
+
   })
   
   
