@@ -1,9 +1,7 @@
 library("shiny")
-library("rhandsontable")
-library("tidyverse")
+library("gene.alignment.tables")
 library("DT")
 library("shinyjs")
-library("gene.alignment.tables")
 
 table_width <- 15
 
