@@ -4,7 +4,7 @@
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom tidyr gather spread
-#' @importFrom dplyr row_number mutate bind_rows select mutate_all funs slice filter
+#' @importFrom dplyr row_number mutate bind_rows select mutate_all funs slice filter coalesce add_row
 #' @importFrom DT formatStyle datatable
 #' @importFrom htmlwidgets JS
 #' 
@@ -14,23 +14,9 @@ alignment_DT_unique_id <- function() {
   paste0("aDT", paste0(sample(letters, 5, TRUE), collapse = ""), collapse = "")
 }
 
-#' alignment_data
-#'
-#' alignment_data converts a sequence dataset into the format required for the gene.alignment.tables visualisation
-#'
-#' @param data A data.frame containing gene sequence data, which must contain the following columns:
-#' \itemize{
-#'  \item{"position"}{ : sequence position, these must be sequential}
-#'  \item{"colour"}{ : colour for the sequence in the gene.alignment.tables visualisation}
-#'  \item{"..."}{ : any other columns will be displayed in the visualisation directly below the position number}
-#'  }
-#'
-#' @param table.width the width of the gene.alignment.tables, defaults to 15 positions.
-#' 
 alignment_data <- function(data,
                            table.width = 15,
-                           slice.position,
-                           return.data = FALSE) {
+                           slice.position) {
   if (nrow(data) < table.width) {
     padding_table <- data[0, ]
 
@@ -60,31 +46,15 @@ alignment_data <- function(data,
   long_data
 }
 
-#' alignment_DT
-#'
-#' alignment_DT generates a single datatable
-#'
-#' @param data A data.frame with start-end pairs, needs the following columns
-#' \itemize{
-#'  \item{"position"}{ : sequence position, these must be sequential}
-#'  \item{"colour"}{ : colour for the sequence in the gene.alignment.tables visualisation}
-#'  \item{"..."}{ : any other columns will be displayed in the visualisation directly below the position number}
-#'  }
-#'
-#' @param table.width the width of the gene.alignment.tables, defaults to 20 positions.
-#' @param slice.position fio
-
 alignment_DT <- function(data,
                          table.width = 15,
                          slice.position,
-                         return.data = FALSE,
                          alignment.table.id) {
   
   long_data <- alignment_data(
     data,
     table.width,
-    slice.position,
-    return.data
+    slice.position
   )
   
   col_colours <- long_data %>%
@@ -172,40 +142,8 @@ alignment_DT <- function(data,
 #'  }
 #'
 #' @param table.width the width of the gene.alignment.tables, defaults to 15 positions.
-#' @param alignment.dt.unique.id The unique name given to datatable objects created by generate_dts, must contain ONLY alphabetical characters. Use alignment_DT_unique_id to ensure a safe name is created. 
+#' @param alignment.table.id The unique name given to datatable objects created by generate_dts, must contain ONLY alphabetical characters. Use alignment_DT_unique_id to ensure a safe name is created. 
 #' @export
-
-# generate_dts <- function(data,
-#                          table.width = 15,
-#                          alignment.dt.unique.id) {
-#   table_width <- table.width
-#   table_width_1 <- table_width - 1
-# 
-# 
-#   
-#   alignmentdt.unique.id <- alignment.dt.unique.id
-#   
-# 
-#   
-#   lapply(
-#     seq(
-#       table_width,
-#       ceiling(max(data$position) / table_width) * table_width,
-#       table_width
-#     ),
-#     function(x) {
-#       data %>%
-#         slice({
-#           x - table_width_1
-#         }:x) %>%
-#         alignment_DT(
-#           table.width = table_width,
-#           slice.position = x,
-#           alignment.dt.unique.id = alignmentdt.unique.id
-#         )
-#     }
-#   )
-# }
 
 generate_dts <- function(data,
                          table.width = 15,
