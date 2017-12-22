@@ -1,0 +1,11 @@
+citHeader("To cite gene.alignment.tables in publications, please use:")
+
+citEntry(entry = "Manual",
+  author = "Martin Hadley",
+  title = "gene.alignment.tables: Interactive Gene Alignment Visualisations for Shiny Apps",
+  year = "2017",
+  doi = "10.6084/m9.figshare.5729229",
+  url = "https://github.com/martinjhnhadley/gene.alignment.tables",
+  textVersion = "Martin Hadley (2017). gene.alignment.tables: Interactive Gene Alignment Visualisations for Shiny
+  Apps. R package version 0.1.0.9000. https://github.com/martinjhnhadley/gene.alignment.tables"
+)
