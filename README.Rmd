@@ -118,4 +118,15 @@ selected_positions <- selected_col_values[["current"]] %>%
 ```
 
 
+## License and Contributing
+
+Contributions are welcomed to this package as Pull Requests or suggestions via the Issue Tracker. The code is licensed under an MIT License.
+
+If you use this package, please do consider citating it! If you don't already know, you can find the citation for a package using `citation("package.name")`. This package is rare* amongst R packages in that is has a DOI [10.6084/m9.figshare.5729229](http://doi.org/10.6084/m9.figshare.5729229)
+
+*CITAITON NEEDED
+
+
+
+
 
