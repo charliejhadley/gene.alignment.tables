@@ -6,7 +6,7 @@ gene.alignment.tables
 This package allows for interactive gene sequence alignment visualisations to be embedded into Shiny apps. An example Shiny app is provided in this package and available using `runExample`, please note that at present the output will only work within a Shiny app - future support to output as a htmlwidget might be possible...
 
 ``` r
-runExample
+runExample()
 ```
 
 <img src="man/figures/README-hbv-alignment-example.png" width="330px" />
@@ -26,10 +26,10 @@ It's unlikely this package will live on CRAN, if it ever does there will be sign
 Example
 -------
 
-The package comes with two example datasets, both of these are based on real research datasets but anonymised.
+The package comes with two example datasets, both of these are based on real research datasets but anonymised (for the time being).
 
 ``` r
-library("gene.alignment.tables")
+# library("gene.alignment.tables")
 str(hbv_long_s_sequence)
 #> Classes 'tbl_df', 'tbl' and 'data.frame':    300 obs. of  4 variables:
 #>  $ position : int  1 2 3 4 5 6 7 8 9 10 ...
