@@ -6,9 +6,11 @@ output: github_document
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-"
+	fig.path = "man/figures/README-",
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
 )
 library("knitr")
 ```
@@ -17,11 +19,12 @@ library("knitr")
 This package allows for interactive gene sequence alignment visualisations to be embedded into Shiny apps. An example Shiny app is provided in this package and available using `runExample`, please note that at present the output will only work within a Shiny app - future support to output as a htmlwidget might be possible...
 
 ```{r runExample, eval=FALSE}
-runExample
+runExample()
 ```
 
 ```{r generate_webshot, out.width = '330px', echo=FALSE}
 library("webshot")
+library("gene.alignment.tables")
 webshot::appshot(app = "inst/shiny-examples/hbv-alignment-viz/",
                  file = "man/figures/README-hbv-alignment-example.png",
                  delay = 7)
@@ -41,10 +44,10 @@ It's unlikely this package will live on CRAN, if it ever does there will be sign
 
 ## Example
 
-The package comes with two example datasets, both of these are based on real research datasets but anonymised.
+The package comes with two example datasets, both of these are based on real research datasets but anonymised (for the time being).
 
 ```{r exampledata, eval=TRUE, message=FALSE, warning=FALSE}
-library("gene.alignment.tables")
+# library("gene.alignment.tables")
 str(hbv_long_s_sequence)
 str(hbv_pol_sequence)
 ```
