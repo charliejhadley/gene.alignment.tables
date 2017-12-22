@@ -16,7 +16,7 @@ generate_dts(data, table.width = 15, alignment.table.id)
 
 \item{table.width}{the width of the gene.alignment.tables, defaults to 15 positions.}
 
-\item{alignment.dt.unique.id}{The unique name given to datatable objects created by generate_dts, must contain ONLY alphabetical characters. Use alignment_DT_unique_id to ensure a safe name is created.}
+\item{alignment.table.id}{The unique name given to datatable objects created by generate_dts, must contain ONLY alphabetical characters. Use alignment_DT_unique_id to ensure a safe name is created.}
 }
 \description{
 \code{generate_dts} generates a set of \code{datatable} objects.
