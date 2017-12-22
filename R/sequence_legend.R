@@ -2,6 +2,8 @@
 #'
 #' \code{coding_region_legend} creates a very simplistic legend of the coding regions using ggplot2.
 #' 
+#' @importFrom ggplot2 theme_bw theme element_blank ggplot geom_rect geom_text scale_fill_manual scale_x_continuous scale_y_continuous
+#' 
 #' @param data A data.frame containing gene sequence data, which must contain the following columns:
 #' \itemize{
 #'  \item{"label"}{ : label for the coding region}
