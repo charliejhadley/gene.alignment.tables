@@ -20,7 +20,7 @@ This package allows for interactive gene sequence alignment visualisations to be
 runExample
 ```
 
-```{r generate_webshot, out.width = '330px', include=TRUE, echo=FALSE}
+```{r generate_webshot, out.width = '330px', echo=FALSE}
 library("webshot")
 webshot::appshot(app = "inst/shiny-examples/hbv-alignment-viz/",
                  file = "man/figures/README-hbv-alignment-example.png",
