@@ -16,7 +16,6 @@ Depends:
     DT,
     htmlwidgets,
     stringr,
-    rlang,
     ggplot2
 Suggests: 
     testthat,
