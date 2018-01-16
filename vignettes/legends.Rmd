@@ -1,0 +1,49 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+There is basic functionality for creating legends provided in the `gene.alignment.tables` package. Here's the baked in example:
+
+```{r}
+library("gene.alignment.tables")
+coding_region_legend(data = coding_region_colours)
+```
+
+When using many labels it is advisable to change the `font.size` argument:
+
+```{r}
+sequence_region_colours <- list(
+  "Reverse transcriptase" = "#ccfecc",
+  "RNAse H" = "#f9fd74",
+  "Spacer" = "#f4b084",
+  "terminal protein" = "#bdd7ee",
+  "Pre-S1" = "#fe6600",
+  "Pre-S2" = "#00b0f0",
+  "S" = "#a9d08e",
+  "Mutation" = "#fc1111"
+)
+
+sequence_region_colours <- tibble(
+  label = names(sequence_region_colours),
+  colour = as.character(sequence_region_colours)
+)
+
+coding_region_legend(data = sequence_region_colours, font.size = 4)
+```
+
