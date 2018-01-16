@@ -9,10 +9,11 @@
 #'  \item{"label"}{ : label for the coding region}
 #'  \item{"colour"}{ : colour for the coding region}
 #'  }
+#' @param font.size Font size of labels in the legend, default to 6.
 #' 
 #' @export 
 
-coding_region_legend <- function(data){
+coding_region_legend <- function(data, font.size = 6){
   
   max_rows <- nrow(data)
   
@@ -29,12 +30,12 @@ coding_region_legend <- function(data){
       xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax,
       fill = colour
     )) +
-    geom_text(aes(x = xmin + (xmax - xmin) / 2, y = ymin + (ymax - ymin) / 2, label = str_wrap(label, width = 1)), size = 6) +
+    geom_text(aes(x = xmin + (xmax - xmin) / 2, y = ymin + (ymax - ymin) / 2, label = str_wrap(label, width = 1)), size = font.size) +
     scale_fill_manual(
-      values = coding_region_colours$colour,
+      values = data$colour,
       name = "",
-      breaks = coding_region_colours$label,
-      labels = coding_region_colours$colour
+      breaks = data$label,
+      labels = data$colour
     ) +
     scale_x_continuous(limits = c(1, max_rows), expand = c(0,0)) +
     scale_y_continuous(limits = c(1, 2), expand = c(0,0)) +
