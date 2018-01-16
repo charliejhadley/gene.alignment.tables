@@ -1,5 +1,5 @@
 Package: gene.alignment.tables
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Title: Interactive Gene Alignment Visualisations for Shiny Apps
 Description: Allows for an interactive gene alignment visualisation to be embedded into a Shiny app
     through the use of multiple DT::datatables(). This package was developed for a specific 
