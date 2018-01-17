@@ -3,6 +3,7 @@
 #' \code{coding_region_legend} creates a very simplistic legend of the coding regions using ggplot2.
 #' 
 #' @importFrom ggplot2 theme_bw theme element_blank ggplot geom_rect geom_text scale_fill_manual scale_x_continuous scale_y_continuous
+#' @importFrom forcats fct_reorder
 #' 
 #' @param data A data.frame containing gene sequence data, which must contain the following columns:
 #' \itemize{
@@ -25,6 +26,8 @@ coding_region_legend <- function(data, font.size = 6){
       ymin = 1,
       ymax = 2
     ) %>%
+    mutate(label = fct_reorder(label, index),
+           colour = fct_reorder(colour, index)) %>%
     ggplot() +
     geom_rect(aes(
       xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax,
