@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "gene.alignment.tables legends"
+author: "Martin John Hadley"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -28,20 +28,16 @@ coding_region_legend(data = coding_region_colours)
 When using many labels it is advisable to change the `font.size` argument:
 
 ```{r}
-sequence_region_colours <- list(
-  "Reverse transcriptase" = "#ccfecc",
-  "RNAse H" = "#f9fd74",
-  "Spacer" = "#f4b084",
-  "terminal protein" = "#bdd7ee",
-  "Pre-S1" = "#fe6600",
-  "Pre-S2" = "#00b0f0",
-  "S" = "#a9d08e",
-  "Mutation" = "#fc1111"
-)
-
-sequence_region_colours <- tibble(
-  label = names(sequence_region_colours),
-  colour = as.character(sequence_region_colours)
+sequence_region_colours <- tribble(
+  ~label, ~colour, ~appears.in.hbv.pol, ~appears.in.hbv.s,
+  "Reverse transcriptase" , "#ccfecc", TRUE, FALSE,
+  "RNAse H" , "#f9fd74", TRUE, FALSE,
+  "Spacer" , "#f4b084", TRUE, FALSE,
+  "terminal protein" , "#bdd7ee", TRUE, FALSE,
+  "Pre-S1" , "#fe6600", FALSE, TRUE,
+  "Pre-S2" , "#00b0f0", FALSE, TRUE,
+  "S" , "#a9d08e", FALSE, TRUE,
+  "Mutation" , "#fc1111", TRUE, TRUE
 )
 
 coding_region_legend(data = sequence_region_colours, font.size = 4)
