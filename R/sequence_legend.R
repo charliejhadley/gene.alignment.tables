@@ -37,7 +37,7 @@ coding_region_legend <- function(data, font.size = 6){
       breaks = data$label,
       labels = data$colour
     ) +
-    scale_x_continuous(limits = c(1, max_rows), expand = c(0,0)) +
+    scale_x_continuous(limits = c(1, max_rows + 1), expand = c(0,0)) +
     scale_y_continuous(limits = c(1, 2), expand = c(0,0)) +
     theme_bw() +
     theme(
