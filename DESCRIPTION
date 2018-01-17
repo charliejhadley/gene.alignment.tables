@@ -18,6 +18,7 @@ Depends:
     magrittr,
     tidyr,
     dplyr,
+    forcats,
     DT,
     htmlwidgets,
     stringr,
