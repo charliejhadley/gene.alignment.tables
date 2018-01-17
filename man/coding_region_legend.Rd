@@ -4,7 +4,7 @@
 \alias{coding_region_legend}
 \title{coding_region_legend}
 \usage{
-coding_region_legend(data)
+coding_region_legend(data, font.size = 6)
 }
 \arguments{
 \item{data}{A data.frame containing gene sequence data, which must contain the following columns:
@@ -12,6 +12,8 @@ coding_region_legend(data)
 \item{"label"}{ : label for the coding region}
 \item{"colour"}{ : colour for the coding region}
 }}
+
+\item{font.size}{Font size of labels in the legend, default to 6.}
 }
 \description{
 \code{coding_region_legend} creates a very simplistic legend of the coding regions using ggplot2.
