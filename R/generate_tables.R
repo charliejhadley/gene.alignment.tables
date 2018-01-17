@@ -61,10 +61,14 @@ alignment_DT <- function(data,
     select(.data$colour) %>%
     mutate(col.index = row_number() + 1)
   
+  original_column_order <- setdiff(colnames(long_data), c("position", "colour"))
+  
   tr_data <- long_data %>%
     select(-.data$colour) %>%
     gather(., foo, val, 2:ncol(.)) %>%
+    mutate(foo = fct_relevel(foo, original_column_order)) %>%
     spread(.data$position, .data$val) %>%
+    mutate(foo = as.character(foo)) %>%
     mutate_all(funs(coalesce(., "-")))
   
   colnames(tr_data) <- gsub("foo", "Position", colnames(tr_data))
