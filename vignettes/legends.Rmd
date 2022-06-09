@@ -1,6 +1,6 @@
 ---
 title: "gene.alignment.tables legends"
-author: "Martin John Hadley"
+author: "Charlie Hadley"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

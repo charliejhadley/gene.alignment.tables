@@ -4,7 +4,7 @@
 <br>
 **Paper Title:** Drug and vaccine resistance in hepatitis B virus (HBV) 2 in Africa: A systematic literature review
 
-**Authors:** Jolynne Mokaya, Anna McNaughton, Martin Hadley, Apsotolos Beloukas, Dominique Goedhals, Philippa C Matthews
+**Authors:** Jolynne Mokaya, Anna McNaughton, Charlie Hadley, Apsotolos Beloukas, Dominique Goedhals, Philippa C Matthews
 
 **DOI:** TBD
 

@@ -4,11 +4,13 @@
 \name{coding_region_colours}
 \alias{coding_region_colours}
 \title{coding_region_colours}
-\format{A data frame with 6 rows and 2 variables:
+\format{
+A data frame with 6 rows and 2 variables:
 \describe{
 \item{label}{Coding region name}
 \item{colour}{Hex colour to use for the specified coding region}
-}}
+}
+}
 \source{
 \url{http://philippa-matthews.com}
 }

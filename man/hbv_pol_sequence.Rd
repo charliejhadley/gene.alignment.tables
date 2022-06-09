@@ -4,13 +4,15 @@
 \name{hbv_pol_sequence}
 \alias{hbv_pol_sequence}
 \title{hbv_pol_sequence sequence data}
-\format{A data frame with 843 rows and 4 variables:
+\format{
+A data frame with 843 rows and 4 variables:
 \describe{
 \item{position}{Gene position}
 \item{reference}{Column to display}
 \item{genome.a}{Alternative lettering}
 \item{colour}{Colour to display this position as in the sequence viz}
-}}
+}
+}
 \source{
 \url{http://philippa-matthews.com}
 }

@@ -18,7 +18,7 @@ You can install gene.alignment.tables from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("martinjhnhadley/gene.alignment.tables")
+devtools::install_github("charliejhadley/gene.alignment.tables")
 ```
 
 It's unlikely this package will live on CRAN, if it ever does there will be significant changes to the packages before deployment.
